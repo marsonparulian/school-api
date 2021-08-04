@@ -1,7 +1,7 @@
 {
   "name": "school-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple school API demo.",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
