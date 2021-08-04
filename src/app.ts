@@ -1,18 +1,27 @@
 import express, { Request, Response } from "express";
+import path from "path";
 
 const createApp = () => {
     const app = express();
 
-    // Index page
-    app.all("/", (req: Request, res: Response) => {
-        res.status(200).send("Index page");
-    })
-    // 404
-    app.use((req: Request, res: Response) => {
-        res.status(404).send("Page not found");
-    });
+    try {
+        // Index page
+        app.all("/", (req: Request, res: Response) => {
+            const indexFile = path.join(__dirname, "..", "static", "index.html");
+            res.sendFile(indexFile);
+        });
 
-    return app;
+        // 404
+        app.use((req: Request, res: Response) => {
+            res.status(404).send("Page not found");
+        });
+    } catch (e) {
+        console.error(e);
+    }
+    finally {
+
+        return app;
+    }
 }
 
 /**
