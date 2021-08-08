@@ -1,16 +1,17 @@
 // This file implements `db` implementation
 import dbMongoDb from "./mongodb/mongodb";
+import { Suburb } from "../../types/common";
 
 // Interface for generic DAO
-export interface DAO {
-    save: () => Promise<void>,
+export interface DAO<T> {
+    save: (data: T) => Promise<T>,
 }
 
 // Interface of DB instance
 export interface DbInterface {
     connect: () => Promise<void>,
     disconnect: () => Promise<void>,
-    suburb: DAO,
+    suburb: DAO<Suburb>,
 }
 
 const db: DbInterface = dbMongoDb;
