@@ -22,6 +22,7 @@ describe("Save suburb", () => {
 
         // Assert the return value. Should contains the given data. 
         expect(result).toEqual(expect.objectContaining({
+            _id: expect.any(String),
             ...data
         }));
     });
