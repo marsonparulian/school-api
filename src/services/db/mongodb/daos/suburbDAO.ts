@@ -21,7 +21,17 @@ const suburbDAO: DAO<Suburb> = {
     find: async (): Promise<Suburb[]> => {
         try {
             // Fetch from DB
-            return SuburbModel.find().lean().exec();
+            const suburbs = await SuburbModel.find().lean().exec();
+
+            //  Cast
+            return suburbs.map(el => {
+                const { _id, name, postCode } = el;
+                return {
+                    _id: _id ? _id.toString() : "",
+                    name,
+                    postCode,
+                }
+            });
         } catch (e) {
             throw (e);
         }

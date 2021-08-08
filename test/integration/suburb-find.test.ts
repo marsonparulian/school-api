@@ -17,8 +17,7 @@ describe("Find suburbs", () => {
         // Result should be array of suburb
         expect(suburbs).toEqual(expect.arrayContaining([
             expect.objectContaining({
-                // _id: expect.any(String),
-                _id: expect.any(Object),
+                _id: expect.any(String),
                 name: expect.any(String),
                 postCode: expect.any(String),
             })
