@@ -1,6 +1,7 @@
 // This file implement `DbInterface` for mongodb.
-import { DbInterface } from "../db";
 import mongoose from "mongoose";
+import { DbInterface } from "../db";
+import suburbDAO from "./daos/suburbDAO";
 
 // Handle error after initial connection
 mongoose.connection.on("error", (e) => {
@@ -54,7 +55,7 @@ const dbMongoDb: DbInterface = {
             }
         });
     },
-
+    suburb: suburbDAO,
 }
 
 export default dbMongoDb;

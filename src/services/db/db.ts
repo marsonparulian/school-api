@@ -10,6 +10,7 @@ export interface DAO {
 export interface DbInterface {
     connect: () => Promise<void>,
     disconnect: () => Promise<void>,
+    suburb: DAO,
 }
 
 const db: DbInterface = dbMongoDb;
