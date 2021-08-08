@@ -8,5 +8,5 @@ const suburbSchema = new Schema<Suburb, Model<Suburb>, Suburb>({
     postCode: { type: String, required: true },
 })
 
-const suburbModel = model<Suburb>("suburb", suburbSchema);
-export default suburbModel;
+const SuburbModel = model<Suburb>("suburb", suburbSchema);
+export default SuburbModel;
