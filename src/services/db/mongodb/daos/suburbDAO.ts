@@ -18,6 +18,15 @@ const suburbDAO: DAO<Suburb> = {
             throw (e);
         }
     },
-}
+    find: async (): Promise<Suburb[]> => {
+        try {
+            // Fetch from DB
+            return SuburbModel.find().lean().exec();
+        } catch (e) {
+            throw (e);
+        }
+
+    },
+};
 
 export default suburbDAO;

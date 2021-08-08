@@ -5,6 +5,7 @@ import { Suburb } from "../../types/common";
 // Interface for generic DAO
 export interface DAO<T> {
     save: (data: T) => Promise<T>,
+    find: () => Promise<T[]>,
 }
 
 // Interface of DB instance
