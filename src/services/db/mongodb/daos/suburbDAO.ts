@@ -55,6 +55,23 @@ const suburbDAO: DAO<Suburb> = {
             throw (e);
         }
     },
+    findByIdAndDelete: async (_id: string): Promise<Suburb | null> => {
+        try {
+            // Find and Delete
+            const deletedSuburb = await SuburbModel.findByIdAndDelete(_id);
+
+            // Return if falsy
+            if (!deletedSuburb) return deletedSuburb;
+            // Cast and return
+            return {
+                _id: deletedSuburb._id ? deletedSuburb._id.toString() : "",
+                name: deletedSuburb.name,
+                postCode: deletedSuburb.postCode,
+            }
+        } catch (e) {
+            throw (e);
+        }
+    }
 };
 
 export default suburbDAO;
