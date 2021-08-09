@@ -37,6 +37,24 @@ const suburbDAO: DAO<Suburb> = {
         }
 
     },
+    findById: async (_id: string): Promise<Suburb | null> => {
+        try {
+            // Fetch
+
+            const suburb = await SuburbModel.findById(_id).lean().exec();
+
+            // Return if falsy
+            if (!suburb) return suburb;
+            // Cast and return
+            return {
+                _id: suburb._id ? suburb._id.toString() : "",
+                name: suburb.name,
+                postCode: suburb.postCode,
+            };
+        } catch (e) {
+            throw (e);
+        }
+    },
 };
 
 export default suburbDAO;

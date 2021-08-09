@@ -6,6 +6,7 @@ import { Suburb } from "../../types/common";
 export interface DAO<T> {
     save: (data: T) => Promise<T>,
     find: () => Promise<T[]>,
+    findById: (_id: string) => Promise<T | null>,
 }
 
 // Interface of DB instance
