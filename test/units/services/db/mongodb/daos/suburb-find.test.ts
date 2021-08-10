@@ -1,4 +1,4 @@
-import db from "../../src/services/db/db";
+import db from "../../../../../../src/services/db/db";
 import "dotenv/config";
 
 // Tests for `db.find` implementation

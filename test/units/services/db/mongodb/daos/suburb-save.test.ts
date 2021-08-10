@@ -1,5 +1,5 @@
 // This file contain test to save `suburb` to DB
-import db from "../../src/services/db/db";
+import db from "../../../../../../src/services/db/db";
 import "dotenv/config";
 
 describe("Save suburb", () => {
