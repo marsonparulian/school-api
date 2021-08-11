@@ -1,5 +1,5 @@
 // This file test  implementation of `db` service`.
-import db from "../../src/services/db/db";
+import db from "../../../../../src/services/db/db";
 import "dotenv/config";
 
 describe("Db service implementation test", () => {
