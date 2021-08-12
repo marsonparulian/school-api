@@ -3,16 +3,22 @@ import { Suburb } from "../../../../types/common";
 import { DAO } from "../../db";
 import SuburbModel from "../models/suburbModel";
 
+// Cast mongoDB document to plain document / record
+const castDocument = (doc: Suburb): Suburb => {
+    return {
+        // Cast`_id` to string
+        _id: doc._id ? doc._id.toString() : "",
+        name: doc.name,
+        postCode: doc.postCode,
+    }
+}
+
 const suburbDAO: DAO<Suburb> = {
     save: async (data: Suburb): Promise<Suburb> => {
         try {
-            const { _id, name, postCode } = await new SuburbModel(data).save();
+            const suburb = await new SuburbModel(data).save();
 
-            return {
-                _id: _id.toString(),
-                name,
-                postCode,
-            };
+            return castDocument(suburb);
 
         } catch (e) {
             throw (e);
@@ -24,13 +30,8 @@ const suburbDAO: DAO<Suburb> = {
             const suburbs = await SuburbModel.find().lean().exec();
 
             //  Cast
-            return suburbs.map(el => {
-                const { _id, name, postCode } = el;
-                return {
-                    _id: _id ? _id.toString() : "",
-                    name,
-                    postCode,
-                }
+            return suburbs.map(doc => {
+                return castDocument(doc);
             });
         } catch (e) {
             throw (e);
@@ -46,11 +47,7 @@ const suburbDAO: DAO<Suburb> = {
             // Return if falsy
             if (!suburb) return suburb;
             // Cast and return
-            return {
-                _id: suburb._id ? suburb._id.toString() : "",
-                name: suburb.name,
-                postCode: suburb.postCode,
-            };
+            return castDocument(suburb)
         } catch (e) {
             throw (e);
         }
@@ -63,11 +60,7 @@ const suburbDAO: DAO<Suburb> = {
             // Return if falsy
             if (!deletedSuburb) return deletedSuburb;
             // Cast and return
-            return {
-                _id: deletedSuburb._id ? deletedSuburb._id.toString() : "",
-                name: deletedSuburb.name,
-                postCode: deletedSuburb.postCode,
-            }
+            return castDocument(deletedSuburb);
         } catch (e) {
             throw (e);
         }
