@@ -16,7 +16,26 @@ const castDocument = (doc: Suburb): Suburb => {
 const suburbDAO: DAO<Suburb> = {
     save: async (data: Suburb): Promise<Suburb> => {
         try {
-            const suburb = await new SuburbModel(data).save();
+            let suburb: Suburb;
+
+            // Is `_id` provided
+            if (data._id) {
+                // Update
+                const updatedSuburb = await SuburbModel.findByIdAndUpdate(data._id, data, {
+                    returnOriginal: false,
+                });
+
+                //  throw error if `null`
+                if (updatedSuburb === null) {
+                    throw new Error("Failed updating suburb due to unknown reason");
+                }
+                // Not null, assign to return var
+                suburb = updatedSuburb;
+
+            } else {
+                // Save new
+                suburb = await new SuburbModel(data).save();
+            }
 
             return castDocument(suburb);
 
