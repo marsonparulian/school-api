@@ -1,8 +1,12 @@
 import express, { Request, Response } from "express";
 import path from "path";
+import suburRouter from "./routers/suburb.router";
 
 const createApp = () => {
     const app = express();
+
+    // Use routers
+    app.use("/api/suburb", suburRouter);
 
     try {
         // Index page
