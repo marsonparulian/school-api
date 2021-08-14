@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { ErrorRequestHandler, Request, Response } from "express";
 import path from "path";
 import suburRouter from "./routers/suburb.router";
 
@@ -10,6 +10,13 @@ const createApp = () => {
 
     // Use routers
     app.use("/api/suburb", suburRouter);
+
+    // Error handler to handle malformed JSON data
+    app.use((err: Error, req: Request, res: Response) => {
+        res.status(400).json({
+            message: "Unknown request error",
+        })
+    });
 
     try {
         // Index page
