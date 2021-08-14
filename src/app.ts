@@ -12,11 +12,11 @@ const createApp = () => {
     app.use("/api/suburb", suburRouter);
 
     // Error handler to handle malformed JSON data
-    app.use((err: Error, req: Request, res: Response) => {
-        res.status(400).json({
-            message: "Unknown request error",
-        })
-    });
+    // app.use((err: Error, req: Request, res: Response) => {
+    //     res.status(400).json({
+    //         message: "Unknown request error",
+    //     })
+    // });
 
     try {
         // Index page
