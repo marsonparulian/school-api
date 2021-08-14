@@ -5,4 +5,4 @@ const texts = {
     SAVED: "Saved",
 }
 
-export default text;
+export default texts;
