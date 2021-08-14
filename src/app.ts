@@ -5,6 +5,9 @@ import suburRouter from "./routers/suburb.router";
 const createApp = () => {
     const app = express();
 
+    // Request parser
+    app.use(express.json());
+
     // Use routers
     app.use("/api/suburb", suburRouter);
 
