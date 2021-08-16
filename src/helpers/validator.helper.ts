@@ -1,5 +1,7 @@
 // Helpers for validation related operations
 
+import { ErrorMessages } from "../types/common";
+
 /**
  * Create key-text pairs for error messages based on `express-validator.validationResult..array()`.
  * @param {object} errorArray - Error array returned from `express-validator.validationResult.array`
@@ -7,9 +9,9 @@
  */
 export const createErrorMessages = (
     errorArray: { param: string, msg: string }[]
-): { [key: string]: string } => {
+): ErrorMessages => {
     return errorArray.reduce((
-        acc: { [key: string]: string },
+        acc: ErrorMessages,
         { param, msg }: { param: string, msg: string }
     ) => {
         acc[param] = msg;
