@@ -38,8 +38,13 @@ describe("Save suburb - invalid cases", () => {
         // Response should be 422
         expect(response.status).toBe(422);
         // Response body should contain 'required' message
+        expect(response.body).toEqual(expect.objectContaining({
+            message: expect.any(String),
+            errors: expect.objectContaining({
+                name: texts.SUBURB_NAME_REQUIRED,
+            })
+        }))
     });
-    test.todo("Suburb name is not alphanumeric");
     test.todo("Suburb post code is not provided");
     test.todo("Post code is empty spaces");
 
