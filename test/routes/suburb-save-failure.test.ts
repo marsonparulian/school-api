@@ -45,8 +45,44 @@ describe("Save suburb - invalid cases", () => {
             })
         }))
     });
-    test.todo("Suburb post code is not provided");
-    test.todo("Post code is empty spaces");
+    test("Suburb post code is not provided", async () => {
+        // Make request
+        const response = await supertest(app)
+            .post("/api/suburb")
+            .send({ name: "Campbelltown" })
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response status should be 422
+        expect(response.status).toBe(422);
+        // Response body should contain 'suburb is required' message
+        expect(response.body).toEqual(expect.objectContaining({
+            message: expect.any(String),
+            errors: expect.objectContaining({
+                postCode: texts.SUBURB_POSTCODE_REQUIRED,
+            })
+        }))
+    });
+    test("Post code is empty spaces", async () => {
+        // Make request
+        const response = await supertest(app)
+            .post("/api/suburb")
+            .send({ name: "Kumbara" })
+            .catch((e) => {
+                throw (e)
+            });
+
+        // Response should be 422
+        expect(response.status).toBe(422);
+        // Response body should contain 'postCode is required' message
+        expect(response.body).toEqual(expect.objectContaining({
+            message: expect.any(String),
+            errors: expect.objectContaining({
+                postCode: texts.SUBURB_POSTCODE_REQUIRED,
+            })
+        }));
+    });
 
     test.todo("Post code is not 4 numbers");
     test.todo("Post code has spaces in between");

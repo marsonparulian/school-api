@@ -50,7 +50,10 @@ const saveSuburb = async (req: Request, res: Response): Promise<void> => {
  * Pipeline of request handlers to save suburb
  */
 const handlers = [
+    // `name`
     body("name").trim().not().isEmpty().withMessage(texts.SUBURB_NAME_REQUIRED),
+    // `postCode`
+    body('postCode').trim().exists({ checkFalsy: true }).withMessage(texts.SUBURB_POSTCODE_REQUIRED),
     validate,
     saveSuburb,
 ];
