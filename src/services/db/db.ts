@@ -14,6 +14,7 @@ export interface DAO<T> {
 export interface DbInterface {
     connect: () => Promise<void>,
     disconnect: () => Promise<void>,
+    dropDatabase: () => Promise<void>,
     suburb: DAO<Suburb>,
 }
 

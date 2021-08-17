@@ -55,6 +55,17 @@ const dbMongoDb: DbInterface = {
             }
         });
     },
+    dropDatabase: (): Promise<void> => {
+        return new Promise((resolve, reject) => {
+            try {
+                mongoose.connection.db.dropDatabase(() => {
+                    resolve();
+                });
+            } catch (e) {
+                reject(e);
+            }
+        });
+    },
     suburb: suburbDAO,
 }
 
