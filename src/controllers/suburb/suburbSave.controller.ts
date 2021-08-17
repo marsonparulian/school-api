@@ -51,12 +51,14 @@ const saveSuburb = async (req: Request, res: Response): Promise<void> => {
  */
 const handlers = [
     // `name`
-    body("name").trim().not().isEmpty().withMessage(texts.SUBURB_NAME_REQUIRED)
+    body("name").trim().not().isEmpty().withMessage(texts.SUBURB_NAME_REQUIRED).bail()
+        .escape()
     ,
     // `postCode`
     body('postCode').trim()
         .exists({ checkFalsy: true }).withMessage(texts.SUBURB_POSTCODE_REQUIRED).bail()
         .matches(/\d{4}/).withMessage(texts.SUBURB_POSTCODE_INVALID).bail()
+        .escape()
     ,
     validate,
     saveSuburb,
