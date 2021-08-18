@@ -1,6 +1,6 @@
 import { Router } from "express";
 import suburbSaveController from "../controllers/suburb/suburbSave.controller";
-import { idShouldExistAndValidInParams } from "../middlewares/validator.middleware";
+import suburbUpdateController from "../controllers/suburb/suburbUpdate.controller";
 
 // Router for `suburb` request
 const router = Router();
@@ -9,7 +9,7 @@ const router = Router();
 router.post("/", suburbSaveController);
 
 // Handle request to update suburb
-router.put("/:_id?", idShouldExistAndValidInParams, suburbSaveController);
+router.put("/:_id?", suburbUpdateController);
 
 // Export router
 export default router;
