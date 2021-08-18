@@ -1,6 +1,8 @@
 // This file contains textx / messages, MOSTLY FOR RESPONSES.
 const texts = {
     SAVED: "Saved",
+    // Validation related
+    VALID_ID_REQUIRED: "Valid id is required",
     // Suburb related
     SUBURB_NAME_REQUIRED: "Suburb name is required",
     SUBURB_NAME_INVALID: "Suburb name is invalid. Should only contain alphanumeric",
