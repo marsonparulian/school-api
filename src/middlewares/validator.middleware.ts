@@ -1,6 +1,6 @@
 // This file contains middlewares related to request validation
 import { Request, Response, NextFunction } from "express";
-import db from "../services/db/db";
+import db, { DAO } from "../services/db/db";
 import texts from "../texts";
 
 /**
@@ -24,3 +24,34 @@ export const idShouldExistAndValidInParams = (req: Request, res: Response, next:
         message: texts.VALID_ID_REQUIRED,
     })
 };
+
+/**
+ * Create middleware to check if `_id` exist in DB.
+ * @param dao {DAO} - DAO object to determine which table / collections to look for
+ * @return {function} - Middleware to validate if the id exist or not
+ */
+export const middlewareIdInParamsShouldExistInDb = (dao: DAO<any>) => {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        // Get the `_id`
+        const _id = req.params._id;
+
+        // Check `_id` in DB
+        const doc = await dao.findByIdAndDelete(_id).catch((e) => {
+            res.status(500).send({
+                message: "Unknown server error",
+                error: e,
+            });
+        });
+
+        // If `_id` exist, continue to next middleware
+        if (doc) {
+            next();
+            return;
+        }
+
+        // Response 'Not Found'
+        res.status(404).send({
+            message: texts.ID_NOT_EXIST,
+        })
+    }
+}
