@@ -66,6 +66,14 @@ const dbMongoDb: DbInterface = {
             }
         });
     },
+    isIdValid: (_id: string): boolean => {
+        // source : https://www.geeksforgeeks.org/how-to-check-if-a-string-is-valid-mongodb-objectid-in-nodejs/
+        if (mongoose.Types.ObjectId.isValid(_id)
+            && (String)(new mongoose.Types.ObjectId(_id)) === _id) {
+            return true
+        }
+        return false;
+    },
     suburb: suburbDAO,
 }
 

@@ -15,6 +15,7 @@ export interface DbInterface {
     connect: () => Promise<void>,
     disconnect: () => Promise<void>,
     dropDatabase: () => Promise<void>,
+    isIdValid: (_id: string) => boolean,
     suburb: DAO<Suburb>,
 }
 
