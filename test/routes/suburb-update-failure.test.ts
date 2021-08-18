@@ -1,5 +1,6 @@
 import supertest from "supertest";
 import app from "../../src/app";
+import texts from "../../src/texts";
 
 // Update suburb test
 describe("Invalid update suburb route test", () => {
@@ -14,7 +15,10 @@ describe("Invalid update suburb route test", () => {
 
         // Response should be 401 Bad Request
         expect(response.status).toBe(400);
-        // Response should contain 'id is required'
+        // Response body should contain 'id is required'
+        expect(response.body).toEqual({
+            message: texts.VALID_ID_REQUIRED,
+        })
     });
     test.todo("Invalid id");
     test.todo("id not exist in DB");
