@@ -20,7 +20,22 @@ describe("Invalid update suburb route test", () => {
             message: texts.VALID_ID_REQUIRED,
         })
     });
-    test.todo("Invalid id");
+    test("Invalid id", async () => {
+        // Make request, supply invalid `_id`
+        const response = await supertest(app)
+            .put("/api/suburb/abc")
+            .send({})
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Resonse status should be 400
+        expect(response.status).toBe(400);
+        // Response body should contain 'invalid id is required' msg
+        expect(response.body).toEqual({
+            message: texts.VALID_ID_REQUIRED,
+        })
+    });
     test.todo("id not exist in DB");
     test.todo("name is falsy");
     test.todo("postCode is falsy");
