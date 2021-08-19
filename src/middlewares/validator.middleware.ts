@@ -36,7 +36,7 @@ export const middlewareIdInParamsShouldExistInDb = (dao: DAO<any>) => {
         const _id = req.params._id;
 
         // Check `_id` in DB
-        const doc = await dao.findByIdAndDelete(_id).catch((e) => {
+        const doc = await dao.findById(_id).catch((e) => {
             res.status(500).send({
                 message: "Unknown server error",
                 error: e,
