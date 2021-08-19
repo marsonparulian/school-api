@@ -1,5 +1,6 @@
 // This file implements `db` implementation
 import dbMongoDb from "./mongodb/mongodb";
+import "dotenv/config";
 import { Suburb } from "../../types/common";
 
 // Interface for generic DAO
@@ -15,6 +16,7 @@ export interface DbInterface {
     connect: () => Promise<void>,
     disconnect: () => Promise<void>,
     dropDatabase: () => Promise<void>,
+    // Check if id is valid
     isIdValid: (_id: string) => boolean,
     suburb: DAO<Suburb>,
 }
