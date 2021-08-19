@@ -31,6 +31,11 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
 const saveSuburb = async (req: Request, res: Response): Promise<void> => {
     const data = req.body;
 
+    // If any, include `_id` from `req.params`
+    if (req.params._id && db.isIdValid(req.params._id)) {
+        data._id = req.params._id || "";
+    }
+
     // Save to DB
     const saved = await db.suburb.save(data).catch((e) => {
         console.error("error", e);
