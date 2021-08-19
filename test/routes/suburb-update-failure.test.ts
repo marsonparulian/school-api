@@ -68,7 +68,7 @@ describe("Invalid update suburb route test", () => {
             });
 
         // Response status should be 201
-        expect(saveResponse.status).toBe(200);
+        expect(saveResponse.status).toBe(201);
 
         // Get the saved id
         const _id = saveResponse.body.suburb._id;

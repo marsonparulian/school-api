@@ -29,8 +29,8 @@ describe("Save suburb - success", () => {
                 throw (e);
             });
 
-        // Response shoule be200
-        expect(response.status).toBe(200);
+        // Response shoule be 201
+        expect(response.status).toBe(201);
         // The response should contained message & the data.
         expect(response.body).toEqual(expect.objectContaining({
             message: texts.SAVED,

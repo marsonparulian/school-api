@@ -39,8 +39,10 @@ const saveSuburb = async (req: Request, res: Response): Promise<void> => {
         });
     });
 
+    // Set status to `201` if the method is `post`, else set to `200`
+    const status = req.method.toUpperCase() === "POST" ? 201 : 200;
     // Send `ok` response
-    res.status(200).json({
+    res.status(status).json({
         message: texts.SAVED,
         suburb: saved,
     });
