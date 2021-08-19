@@ -1,6 +1,7 @@
 // This file contains textx / messages, MOSTLY FOR RESPONSES.
 const texts = {
     SAVED: "Saved",
+    FETCH_SUCCESS: "Fetch success",
     // Validation related
     VALID_ID_REQUIRED: "Valid id is required",
     ID_NOT_EXIST: "Id not exist",
