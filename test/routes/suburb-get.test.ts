@@ -1,6 +1,7 @@
 import supertest from "supertest";
 import app from "../../src/app";
 import db from "../../src/services/db/db";
+import texts from "../../src/texts";
 
 // This file contains test cases of fetching suburbs from app / server
 describe("Get suburbs ", () => {
@@ -13,7 +14,24 @@ describe("Get suburbs ", () => {
         await db.connect();
     });
     test("Has 0 suburbs", async () => {
+        // Drop DB
+        await db.dropDatabase().catch((e) => {
+            throw (e);
+        });
+        // Make GET request
+        const response = await supertest(app)
+            .get("/api/suburb")
+            .catch((e) => {
+                throw (e);
+            });
 
+        // Response body should contain empty array
+        expect(response.body).toEqual({
+            message: texts.FETCH_SUCCESS,
+            suburbs: [],
+        });
+        // Response status should be 200
+        expect(response.status).toBe(200);
     });
     test.todo("Has 1 suburbs");
     test.todo("Has 2 suburbs");
