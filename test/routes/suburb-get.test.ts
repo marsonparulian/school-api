@@ -6,7 +6,7 @@ import db from "../../src/services/db/db";
 describe("Get suburbs ", () => {
     // Data to be shared between tests;
     const suburb1Data = { name: "Red", postCode: "1111" };
-    const suburb2Data = { name "Green", postCode: "2222" };
+    const suburb2Data = { name: "Green", postCode: "2222" };
     const suburb3Data = { name: "Blue", postCode: "3333" };
     beforeAll(async () => {
         // Connect to DB
