@@ -6,6 +6,8 @@ import "dotenv/config";
 
 // Update suburb test
 describe("Invalid update suburb route test", () => {
+    // vars to share between tests
+    let suburbId: string;
     beforeAll(async () => {
         // Connect to DB
         await db.connect();
@@ -70,12 +72,12 @@ describe("Invalid update suburb route test", () => {
         // Response status should be 201
         expect(saveResponse.status).toBe(201);
 
-        // Get the saved id
-        const _id = saveResponse.body.suburb._id;
+        // Get the saved id. Also will be used for later test.
+        suburbId = saveResponse.body.suburb._id;
 
         // Make request with falsy `name
         const response = await supertest(app)
-            .put(`/api/suburb/${_id}`)
+            .put(`/api/suburb/${suburbId}`)
             .send({ postCode: "3456" })
             .catch((e) => {
                 throw (e);
@@ -91,7 +93,25 @@ describe("Invalid update suburb route test", () => {
             })
         }))
     });
-    test.todo("postCode is falsy");
+    test("postCode is falsy", async () => {
+        // Make request with falsy `postCode` using `suburbId` from previous test.
+        const response = await supertest(app)
+            .put(`/api/suburb/${suburbId}`)
+            .send({ name: "Bankstown" })
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response status should be 422
+        expect(response.status).toBe(422);
+        // Response body should contain 'post code is required' msg
+        expect(response.body).toEqual(expect.objectContaining({
+            message: expect.any(String),
+            errors: expect.objectContaining({
+                postCode: texts.SUBURB_POSTCODE_REQUIRED,
+            })
+        }))
+    });
     afterAll(async () => {
         // Disconnect DB
         await db.disconnect();
