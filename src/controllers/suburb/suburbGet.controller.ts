@@ -6,9 +6,19 @@ import texts from "../../texts";
 /**
  * Send response of array of suburbs
  */
-export const getSuburbs = (req: Request, res: Response): void => {
-    res.status(200).send({
-        message: texts.FETCH_SUCCESS,
-        suburbs: [],
-    });
+export const getSuburbs = async (req: Request, res: Response): Promise<void> => {
+    try {
+        // Fetch from DB
+        const suburbs = await db.suburb.find();
+
+        // Response
+        res.status(200).send({
+            message: texts.FETCH_SUCCESS,
+            suburbs,
+        });
+    } catch (e) {
+        res.status(500).send({
+            message: "Unknown server error."
+        });
+    }
 }
