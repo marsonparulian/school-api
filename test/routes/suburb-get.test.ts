@@ -108,7 +108,35 @@ describe("Get suburbs ", () => {
         // Response status should be 200
         expect(fetchResponse.status).toBe(200);
     });
-    test.todo("Has 3 suburbs");
+    test("Has 3 suburbs", async () => {
+        // Save the third suburb
+        const saveResponse = await supertest(app)
+            .post("/api/suburb")
+            .send(suburb3Data)
+            .catch((e) => {
+                throw (e);
+            });
+
+        //Response status should be 201
+        expect(saveResponse.status).toBe(201);
+
+        // Make request to fetched suburbs
+        const fetchResponse = await supertest(app)
+            .get("/api/suburb")
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response body should have the expected format
+        expect(fetchResponse.body).toEqual(expect.objectContaining({
+            message: texts.FETCH_SUCCESS,
+            suburbs: expect.any(Array),
+        }));
+        // Response body should contains suburbs of 3 elements array
+        expect(fetchResponse.body.suburbs.length).toBe(3);
+        // Response status should be 200
+        expect(fetchResponse.status).toBe(200);
+    });
     afterAll(async () => {
         // DIsconnect DB
         await db.disconnect();
