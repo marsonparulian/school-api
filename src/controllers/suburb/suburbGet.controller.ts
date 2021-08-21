@@ -1,7 +1,7 @@
 // This file contains controllers to handle GET suburbs request
 import { Request, Response } from "express";
 import db from "../../services/db/db";
-import { idShouldExistAndValidInParams } from "../../middlewares/validator.middleware";
+import { idShouldExistAndValidInParams, middlewareIdInParamsShouldExistInDb } from "../../middlewares/validator.middleware";
 import texts from "../../texts";
 
 export const getSuburbById = async (req: Request, res: Response): Promise<void> => {
@@ -29,6 +29,7 @@ export const getSuburbById = async (req: Request, res: Response): Promise<void> 
 
 export const getSuburbBydIdPipeline = [
     idShouldExistAndValidInParams,
+    middlewareIdInParamsShouldExistInDb(db.suburb),
     getSuburbById,
 ]
 
