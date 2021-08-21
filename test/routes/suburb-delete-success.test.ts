@@ -4,6 +4,9 @@ import db from "../../src/services/db/db";
 import texts from "../../src/texts";
 import tests from "../../src/texts";
 
+// Increase timeout
+jest.setTimeout(9000);
+
 // This file contain test cases to delete suburb by id
 describe("Delete suburb by id test cases", () => {
     // Shared variables between tests
