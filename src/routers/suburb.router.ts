@@ -10,6 +10,9 @@ const router = Router();
 // Handle  GET suburbs
 router.get("/", suburbGetController.getSuburbs);
 
+// Handle GET suburb by id
+router.get("/:_id", suburbGetController.getSuburbBydIdPipeline);
+
 // Handle request to save
 router.post("/", suburbSaveController);
 
