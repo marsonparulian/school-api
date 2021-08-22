@@ -2,6 +2,7 @@
 import mongoose from "mongoose";
 import { DbInterface } from "../db";
 import suburbDAO from "./daos/suburbDAO";
+import schoolDAO from "./daos/schoolDAO";
 
 // Handle error after initial connection
 mongoose.connection.on("error", (e) => {
@@ -75,6 +76,7 @@ const dbMongoDb: DbInterface = {
         return false;
     },
     suburb: suburbDAO,
+    school: schoolDAO,
 }
 
 export default dbMongoDb;

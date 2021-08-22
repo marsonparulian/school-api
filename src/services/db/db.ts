@@ -1,7 +1,7 @@
 // This file implements `db` implementation
 import dbMongoDb from "./mongodb/mongodb";
 import "dotenv/config";
-import { Suburb } from "../../types/common";
+import { Suburb, School } from "../../types/common";
 
 // Interface for generic DAO
 export interface DAO<T> {
@@ -19,6 +19,7 @@ export interface DbInterface {
     // Check if id is valid
     isIdValid: (_id: string) => boolean,
     suburb: DAO<Suburb>,
+    school: DAO<School>,
 }
 
 const db: DbInterface = dbMongoDb;
