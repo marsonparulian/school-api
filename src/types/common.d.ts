@@ -10,7 +10,7 @@ export interface Suburb extends Entity {
     postCode: string,
 }
 
-export interface School {
+export interface School extends Entity {
     name: string
 }
 /**
