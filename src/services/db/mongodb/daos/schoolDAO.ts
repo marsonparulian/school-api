@@ -11,7 +11,11 @@ const schoolDAO: DAO<School> = {
         return data;
     },
     find: async (): Promise<School[]> => {
-        return [];
+        try {
+            return schoolModel.find().lean().exec();
+        } catch (e) {
+            throw (e);
+        }
     },
     findById: async (_id: string): Promise<School | null> => {
         return null;
