@@ -10,6 +10,9 @@ export interface Suburb extends Entity {
     postCode: string,
 }
 
+export interface School {
+    name: string
+}
 /**
  * Key - text object represent error messages with param name as key and message as the value (string)
  */
