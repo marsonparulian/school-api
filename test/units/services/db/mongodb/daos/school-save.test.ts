@@ -1,9 +1,11 @@
+import mongoose from "mongoose";
 import db from "../../../../../../src/services/db/db";
 import { School } from "../../../../../../src/types/common";
 
 // This file contains `DAO<School>.save` implementation for mongodb
 describe("DAO<School> - mongodb", () => {
     // shared variables
+    const suburb1Data = { name: "Midtown", postCode: "1234" };
     const school1Data = {
         name: "Midtown Public School",
     };
@@ -13,20 +15,29 @@ describe("DAO<School> - mongodb", () => {
 
         // Drop DB
         await db.dropDatabase();
-
-        // TODO Save suburb 1
     });
     test("Save new school", async () => {
+        // Save suburb1
+        const suburb1 = await db.suburb.save(suburb1Data).catch((e) => {
+            throw (e);
+        });
+
+        // Suburb1._id should not be falsy
+        expect(suburb1._id).not.toBeFalsy();
+
         // Save new school
-        const saved = await db.school.save(school1Data)
-            .catch((e) => {
-                throw (e);
-            });
+        const school1 = await db.school.save({
+            ...school1Data,
+            suburb: suburb1._id ? suburb1._id : "",
+        }).catch((e) => {
+            throw (e);
+        });
 
         // The returned should be an object containing `school1Data` and `_id`
-        expect(saved).toEqual(expect.objectContaining({
+        expect(school1).toEqual(expect.objectContaining({
             _id: expect.any(String),
             ...school1Data,
+            // suburb: suburb1._id ? suburb1._id.toString() : "",
         }));
 
         // Find all schools from DB

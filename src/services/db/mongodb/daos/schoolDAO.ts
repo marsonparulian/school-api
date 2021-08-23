@@ -12,6 +12,8 @@ const castDocumentToObject = (doc: School) => {
     return {
         _id: doc._id ? doc._id.toString() : "",
         name: doc.name,
+        // If `doc.suburb` is instanceof `ObjectId` cast to string. Otherwise return as it is.
+        suburb: (doc.suburb instanceof mongoose.Types.ObjectId) ? doc.suburb.toString() : doc.suburb,
     }
 };
 

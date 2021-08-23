@@ -11,7 +11,8 @@ export interface Suburb extends Entity {
 }
 
 export interface School extends Entity {
-    name: string
+    name: string,
+    suburb: string | Suburb,
 }
 /**
  * Key - text object represent error messages with param name as key and message as the value (string)

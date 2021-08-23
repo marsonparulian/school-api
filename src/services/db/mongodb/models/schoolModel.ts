@@ -8,6 +8,11 @@ const schema = new Schema<School>({
         type: String,
         required: true,
     },
+    suburb: {
+        type: Schema.Types.ObjectId,
+        ref: "suburb",
+        required: true,
+    },
 });
 
 const schoolModel = model<School, Model<School>>("school", schema);
