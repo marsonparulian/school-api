@@ -4,7 +4,7 @@ import { DAO } from "../../db";
 import SuburbModel from "../models/suburbModel";
 
 // Cast mongoDB document to plain document / record
-const castDocument = (doc: Suburb): Suburb => {
+export const castDocument = (doc: Suburb): Suburb => {
     return {
         // Cast`_id` to string
         _id: doc._id ? doc._id.toString() : "",
