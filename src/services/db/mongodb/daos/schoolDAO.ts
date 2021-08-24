@@ -31,8 +31,24 @@ const castDocumentToObject = (doc: School) => {
 const schoolDAO: DAO<School> = {
     save: async (data: School): Promise<School> => {
         try {
-            // Save new
-            const school = await new schoolModel(data).save();
+            let school: School;
+
+            // Is `_id` provided ?
+            if (data._id) {
+                // Update
+                const updated = await schoolModel.findByIdAndUpdate(data._id, data, {
+                    returnOriginal: false,
+                });
+
+                // If falsy, throw error
+                if (!updated) throw new Error("Failed update school due to unknown reason.");
+                // Assign to will be returned variable
+                school = updated;
+            } else {
+                // Save new
+                school = await new schoolModel(data).save();
+
+            }
 
             // Cast & return
             return castDocumentToObject(school);
