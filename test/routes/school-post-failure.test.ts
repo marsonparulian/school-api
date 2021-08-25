@@ -13,6 +13,7 @@ describe("POST /api/school - invalid cases", () => {
     test.todo("School name is empty");
     test.todo("Suburb is not provided");
     test.todo("Suburb is empty");
+    test.todo("The provided suburb is not a valid id");
     test.todo("The provided suburb id is not exist in DB");
     afterAll(async () => {
         // Disconnect
