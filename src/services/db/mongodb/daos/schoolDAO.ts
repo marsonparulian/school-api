@@ -93,7 +93,19 @@ const schoolDAO: DAO<School> = {
         }
     },
     findByIdAndDelete: async (_id: string): Promise<School | null> => {
-        return null;
+        try {
+            // Delete
+            const result = await schoolModel.findByIdAndDelete(_id);
+
+            // Is falsy ?
+            if (!result) {
+                return null;
+            } else {
+                return castDocumentToObject(result);
+            }
+        } catch (e) {
+            throw (e);
+        }
     },
 }
 export default schoolDAO;
