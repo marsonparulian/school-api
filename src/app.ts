@@ -1,6 +1,7 @@
 import express, { ErrorRequestHandler, Request, Response } from "express";
 import path from "path";
 import suburRouter from "./routers/suburb.router";
+import schoolRouter from "./routers/school.router";
 
 const createApp = () => {
     const app = express();
@@ -10,6 +11,7 @@ const createApp = () => {
 
     // Use routers
     app.use("/api/suburb", suburRouter);
+    app.use("/api/school", schoolRouter);
 
     // Error handler to handle malformed JSON data
     // app.use((err: Error, req: Request, res: Response) => {
