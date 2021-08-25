@@ -3,6 +3,7 @@ import { DAO } from "../../db";
 import schoolModel from "../models/schoolModel";
 import { School, Suburb } from "../../../../types/common";
 import * as suburbDAO from "./suburbDAO";
+import texts from "../../../../texts";
 
 /**
  * Cast mongodb Document<School> to plain `School` object.
@@ -76,7 +77,20 @@ const schoolDAO: DAO<School> = {
         }
     },
     findById: async (_id: string): Promise<School | null> => {
-        return null;
+        try {
+            const school = await schoolModel.findById(_id)
+                .lean().populate("suburb");
+
+            // Is result falsy
+            if (!school) {
+                throw new Error(texts.FETCH_FAILURE);
+            } else {
+                // Cast document & return
+                return castDocumentToObject(school);
+            }
+        } catch (e) {
+            throw (e);
+        }
     },
     findByIdAndDelete: async (_id: string): Promise<School | null> => {
         return null;

@@ -2,7 +2,8 @@
 const texts = {
     SAVED: "Saved",
     FETCH_SUCCESS: "Fetch success",
-    DELETE_SUCCESS: "Delete success.", 
+    FETCH_FAILURE: "Fetch failed.",
+    DELETE_SUCCESS: "Delete success.",
     // Validation related
     VALID_ID_REQUIRED: "Valid id is required",
     ID_NOT_EXIST: "Id not exist",
