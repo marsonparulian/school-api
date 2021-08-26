@@ -1,3 +1,4 @@
+import { text } from "express";
 import supertest from "supertest";
 import app from "../../src/app";
 import db from "../../src/services/db/db";
@@ -29,7 +30,24 @@ describe("POST /api/school - invalid cases", () => {
             }),
         }));
     });
-    test.todo("School name is empty");
+    test("School name is empty", async () => {
+        // Make request with falsy `name`
+        const response = await supertest(app)
+            .post("/api/school")
+            .send({ name: "" })
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response body should contain 'name is required' msg`
+        expect(response.body).toEqual(expect.objectContaining({
+            message: texts.save_failure,
+            errors: expect.objectContaining({
+                name: texts.REQUIRED,
+            })
+        }))
+        // Response status should be 422
+    });
     test.todo("Suburb is not provided");
     test.todo("Suburb is empty");
     test.todo("The provided suburb is not a valid id");
