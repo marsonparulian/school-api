@@ -39,6 +39,10 @@ const handlers = [
     body("name").trim()
         .not().isEmpty().withMessage(texts.REQUIRED).bail()
         .escape(),
+    // Suburb field
+    body("suburb").trim()
+        .not().isEmpty().withMessage(texts.REQUIRED).bail()
+        .escape(),
     validate,
     saveSchool,
 ];

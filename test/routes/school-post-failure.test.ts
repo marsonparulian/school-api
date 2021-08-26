@@ -49,7 +49,24 @@ describe("POST /api/school - invalid cases", () => {
         // Response status should be 422
         expect(response.status).toBe(422);
     });
-    test.todo("Suburb is not provided");
+    test("Suburb is not provided", async () => {
+        // Make request with no `suburb`
+        const response = await supertest(app)
+            .post("/api/school")
+            .send({ name: "Boys School" })
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response body should contain 'suburb is required' msg.
+        expect(response.body).toEqual(expect.objectContaining({
+            message: texts.save_failure,
+            errors: expect.objectContaining({
+                suburb: texts.REQUIRED,
+            })
+        }))
+        // Response status should be 422
+    });
     test.todo("Suburb is empty");
     test.todo("The provided suburb is not a valid id");
     test.todo("The provided suburb id is not exist in DB");
