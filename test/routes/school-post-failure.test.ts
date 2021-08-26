@@ -47,6 +47,7 @@ describe("POST /api/school - invalid cases", () => {
             })
         }))
         // Response status should be 422
+        expect(response.status).toBe(422);
     });
     test.todo("Suburb is not provided");
     test.todo("Suburb is empty");
