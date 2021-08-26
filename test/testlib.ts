@@ -1,5 +1,6 @@
 // This file contain data that can be used repeatedly in tests
 const lib = {
+    randomId: "123456789012345678901234",
     //'Data's below not contain id or reference property since the `_id`s are generated in DB
     suburb1Data: { name: "Sydney", postCode: "2000" },
     suburb2Data: { name: "Paramatta", postCode: "2150" },
