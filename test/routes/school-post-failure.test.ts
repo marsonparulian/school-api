@@ -86,7 +86,25 @@ describe("POST /api/school - invalid cases", () => {
         // Response status should be 422
         expect(response.status).toBe(422);
     });
-    test.todo("The provided suburb is not a valid id");
+    test("The provided suburb is not a valid id", async () => {
+        // Make request with `suburb` value is invalid id
+        const response = await supertest(app)
+            .post("/api/school")
+            .send({ name: "Girls School", suburb: "--" })
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response body should contain 'valid id' is required in  `suburb`
+        expect(response.body).toEqual(expect.objectContaining({
+            message: texts.save_failure,
+            errors: expect.objectContaining({
+                suburb: texts.VALID_ID_REQUIRED,
+            }),
+        }));
+        // Response status should be 422
+        expect(response.status).toBe(422);
+    });
     test.todo("The provided suburb id is not exist in DB");
     afterAll(async () => {
         // Disconnect

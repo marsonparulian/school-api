@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, text } from "express";
 import { body, validationResult } from "express-validator";
 import { createErrorMessages } from "../../helpers/validator.helper";
+import db from "../../services/db/db";
 import texts from "../../texts";
 
 /**
@@ -42,6 +43,8 @@ const handlers = [
     // Suburb field
     body("suburb").trim()
         .not().isEmpty().withMessage(texts.REQUIRED).bail()
+        // suburb id has to be valid
+        .custom(db.isIdValid).withMessage(texts.VALID_ID_REQUIRED).bail()
         .escape(),
     validate,
     saveSchool,
