@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, text } from "express";
 import { body, validationResult } from "express-validator";
-import { createErrorMessages } from "../../helpers/validator.helper";
+import { createErrorMessages, isEntityExistInDB } from "../../helpers/validator.helper";
 import db from "../../services/db/db";
 import texts from "../../texts";
 
@@ -45,6 +45,8 @@ const handlers = [
         .not().isEmpty().withMessage(texts.REQUIRED).bail()
         // suburb id has to be valid
         .custom(db.isIdValid).withMessage(texts.VALID_ID_REQUIRED).bail()
+        // Suburb id should exist in DB
+        .custom((value) => isEntityExistInDB(db.suburb, value)).withMessage(texts.ID_NOT_EXIST).bail()
         .escape(),
     validate,
     saveSchool,
