@@ -4,6 +4,9 @@ import db from "../../src/services/db/db";
 import texts from "../../src/texts";
 import testlib from "../testlib";
 
+// Increase timeout since test will require few DB operations.
+jest.setTimeout(9000);
+
 // This file contains test cases for successful POST /api/school (creating school)
 describe("POST /api/school - success", () => {
     beforeAll(async () => {
@@ -46,12 +49,15 @@ describe("POST /api/school - success", () => {
         expect(saveSchoolResponse.status).toBe(201);
 
         // Persist the school id
-        const schoolId = saveSchoolResponse.body._id;
+        const schoolId = saveSchoolResponse.body.school._id;
 
         // Fetch  school directly with `_id`
+        const school = await db.school.findById(schoolId).catch((e) => {
+            throw (e);
+        });
 
         // The fetche data should contain the saved school data
-
+        expect(school).toEqual(expect.objectContaining(testlib.school1Data));
 
 
     });
