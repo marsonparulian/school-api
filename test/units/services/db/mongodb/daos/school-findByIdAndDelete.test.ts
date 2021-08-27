@@ -48,13 +48,11 @@ describe("DAO<School> - findByIdAndDelete", () => {
             ...testlib.school1Data,
         }))
 
-        // school should no longer exist. Should throw error.
-        let fetchSchoolError: boolean = false;
+        // school should no longer exist. Should be `null`.
         const fetched2School = await db.school.findById(schoolId).catch((e) => {
-            // Rejected because the school is not found.
-            fetchSchoolError = true;
+            throw (e);
         });
-        expect(fetchSchoolError).toBe(true);
+        expect(fetched2School).toBeNull();
 
         // Suburb should still exist
         const fetchedSuburb = await db.suburb.findById(suburbId).catch((e) => {
