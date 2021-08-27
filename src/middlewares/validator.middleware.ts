@@ -39,8 +39,9 @@ export const middlewareIdInParamsShouldExistInDb = (dao: DAO<any>) => {
         const doc = await dao.findById(_id).catch((e) => {
             res.status(500).send({
                 message: "Unknown server error",
-                error: e,
+                error: e.message,
             });
+            return;
         });
 
         // If `_id` exist, continue to next middleware
