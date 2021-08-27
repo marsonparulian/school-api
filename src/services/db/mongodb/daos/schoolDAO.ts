@@ -83,7 +83,7 @@ const schoolDAO: DAO<School> = {
 
             // Is result falsy
             if (!school) {
-                throw new Error(texts.FETCH_FAILURE);
+                return null;
             } else {
                 // Cast document & return
                 return castDocumentToObject(school);
