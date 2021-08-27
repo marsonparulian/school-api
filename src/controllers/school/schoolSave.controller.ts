@@ -31,8 +31,34 @@ const validate = async (req: Request, res: Response, next: NextFunction): Promis
  *  Save new / existing school.
  */
 const saveSchool = async (req: Request, res: Response): Promise<void> => {
-    // FIXME 
-    res.status(501).end("Not implemented");
+    // Get data from `body`
+    const data = req.body;
+
+    // `req.params._id` ?
+    if (req.params._id) {
+        // Include  in `data`
+        data._id = req.params._id;
+    }
+
+    // Save
+    const school = await db.school.save(data).catch((e) => {
+        // Handle unknown error
+        console.error("Unknow error saving school", e);
+        // Response
+        res.status(500).json({
+            message: texts.save_failure,
+            error: e.message,
+        });
+    });
+
+    // set `responseStatus`. `201` or `200`
+    const responseStatus = 201;
+
+    // Send Response
+    res.status(responseStatus).json({
+        message: texts.SAVED,
+        school,
+    });
 }
 
 const handlers = [
