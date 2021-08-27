@@ -52,7 +52,7 @@ const saveSchool = async (req: Request, res: Response): Promise<void> => {
     });
 
     // set `responseStatus`. `201` or `200`
-    const responseStatus = 201;
+    const responseStatus = req.method.toLowerCase() === "post" ? 201 : 200;
 
     // Send Response
     res.status(responseStatus).json({
