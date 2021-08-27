@@ -10,7 +10,21 @@ describe("Update school - failed cases", () => {
         // Connect to DB
         await db.connect();
     });
-    test.todo("With invalid id");
+    test("With invalid id", async () => {
+        // Make request to update with invalid id
+        const response = await supertest(app)
+            .put("/api/school/--")
+            .send({})
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Request body should contain 'valid id is required' msg.
+        expect(response.body).toEqual(expect.objectContaining({
+            message: texts.VALID_ID_REQUIRED,
+        }));
+        // Response status should be 422
+    });
     test.todo("Update with not existing id");
     afterAll(async () => {
         //Disconnect
