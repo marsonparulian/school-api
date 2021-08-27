@@ -35,8 +35,12 @@ const lib = {
     suburb1Data: { name: "Sydney", postCode: "2000" },
     suburb2Data: { name: "Paramatta", postCode: "2150" },
     suburb3Data: { name: "Blacktown", postCode: "2148" },
+    suburb4Data: { name: "Castle Hill", postCode: "2154" },
+    suburb5Data: { name: "Westmead", postcode: "2145" },
     school1Data: { name: "Sydney Boys" },
     school2Data: { name: "Paramatta Public" },
+    school3Data: { name: "Smart Junior School" },
+    school4Data: { name: "Good School" },
     createSchoolAndSuburb,
 }
 export default lib;
