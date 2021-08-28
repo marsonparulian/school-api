@@ -9,6 +9,10 @@ jest.setTimeout(12000);
 
 // This file contain test cases for GET `/api/school` (fetch school)
 describe("GET /api/school", () => {
+    // Shared variables
+    let schoolId: string;
+    let schoolName: string;
+
     beforeAll(async () => {
         // Connect to db
         await db.connect();
@@ -65,7 +69,9 @@ describe("GET /api/school", () => {
         const school2Data = testlib.school6Data;
 
         // Create a new school & suburb
-        await testlib.createSchoolAndSuburb(school1Data, testlib.suburb4Data);
+        // Persist this school id & `name` to be used later on the next test.   
+        [schoolId] = await testlib.createSchoolAndSuburb(school1Data, testlib.suburb4Data);
+        schoolName = school1Data.name;
 
         // Create another news school & suburb
         await testlib.createSchoolAndSuburb(school2Data, testlib.suburb4Data);
@@ -89,7 +95,24 @@ describe("GET /api/school", () => {
         // Response status should be 200
         expect(response.status).toBe(200);
     });
-    test.todo("GET by school id ");
+    test("GET by school id ", async () => {
+        // Make request to fetch school by specific id
+        const response = await supertest(app)
+            .get(`/api/school/${schoolId}`)
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response body should  have property `school` containing the saved school data
+        expect(response.body).toEqual(expect.objectContaining({
+            message: texts.FETCH_SUCCESS,
+            school: expect.objectContaining({
+                name: schoolName,
+            }),
+        }))
+        // Response status should be 200
+        expect(response.status).toBe(200);
+    });
     afterAll(async () => {
         // Disconnect
         await db.disconnect();

@@ -29,9 +29,19 @@ export const getSchool = async (req: Request, res: Response): Promise<void> => {
  * Handle request for school with specific id
  */
 const getSchoolById = async (req: Request, res: Response): Promise<void> => {
-    res.status(501).json({
-        message: "Not implemented"
+    // Fetch
+    const school = await db.school.findById(req.params._id).catch((e) => {
+        // Something wrong
+        res.status(500).json({
+            message: `Unknown error : fetching school by id : ${req.params._id}`,
+        });
     });
+
+    // Send response
+    res.status(200).json({
+        message: texts.FETCH_SUCCESS,
+        school,
+    })
 }
 
 export const validateThenGetSchoolById = [
