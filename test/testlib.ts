@@ -41,6 +41,8 @@ const lib = {
     school2Data: { name: "Paramatta Public" },
     school3Data: { name: "Smart Junior School" },
     school4Data: { name: "Good School" },
+    school5Data: { name: "South School" },
+    school6Data: { name: "Catholic School" },
     createSchoolAndSuburb,
 }
 export default lib;
