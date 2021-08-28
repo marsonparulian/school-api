@@ -9,8 +9,7 @@ describe("GET /api/school - failed cases", () => {
         // Connect to DB
         await db.connect();
     });
-    test.todo("GET with missing '_id'");
-    test.todo("GET with falsy 'id'");
+    test.todo("GET with invalid id ");
     test.todo("GET with non existing 'id'");
     afterAll(async () => {
         // DIsconnect
