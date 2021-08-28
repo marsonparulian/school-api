@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import db from "../../services/db/db";
+import { idShouldExistAndValidInParams, middlewareIdInParamsShouldExistInDb } from "../../middlewares/validator.middleware";
 import texts from "../../texts";
 
 /**
@@ -27,8 +28,16 @@ export const getSchool = async (req: Request, res: Response): Promise<void> => {
 /**
  * Handle request for school with specific id
  */
-export const getSchoolById = async (req: Request, res: Response): Promise<void> => {
+const getSchoolById = async (req: Request, res: Response): Promise<void> => {
     res.status(501).json({
         message: "Not implemented"
     });
 }
+
+export const validateThenGetSchoolById = [
+    // Param `_id` should be valid
+    idShouldExistAndValidInParams,
+    // Param `_id` should exist in DB
+    middlewareIdInParamsShouldExistInDb(db.school),
+    getSchoolById
+];

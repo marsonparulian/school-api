@@ -9,6 +9,9 @@ const router = Router();
 // GET list of school
 router.get("/", schoolGetController.getSchool);
 
+// GET specific school by id
+router.get("/:_id", schoolGetController.validateThenGetSchoolById);
+
 // Save new school
 router.post("/", schoolSaveController);
 
