@@ -18,7 +18,8 @@ router.post("/", schoolSaveController);
 
 // Save existing school
 router.put("/:_id", schoolUpdateController);
+
 // DELETE school by id
-router.delete(":_id?", schoolDeleteController);
+router.delete("/:_id?", schoolDeleteController);
 
 export default router;

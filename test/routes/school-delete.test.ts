@@ -25,7 +25,21 @@ describe("DELETE /api/school/_id", () => {
         // Response status should be 400
         expect(response.status).toBe(400);
     });
-    test.todo("Invalid id param");
+    test("Invalid id param", async () => {
+        // Make request with invalid id
+        const response = await supertest(app)
+            .delete("/api/school/--")
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Request body should contain 'valid id is required' msg
+        expect(response.body).toEqual({
+            message: texts.VALID_ID_REQUIRED,
+        });
+        // Response status should be 400
+        expect(response.status).toBe(400);
+    });
     test.todo("Non existing id param in DB");
     test.todo("Successful deleetion");
     afterAll(async () => {
