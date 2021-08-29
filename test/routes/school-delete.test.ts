@@ -23,6 +23,7 @@ describe("DELETE /api/school/_id", () => {
             message: texts.VALID_ID_REQUIRED,
         });
         // Response status should be 400
+        expect(response.status).toBe(400);
     });
     test.todo("Invalid id param");
     test.todo("Non existing id param in DB");
