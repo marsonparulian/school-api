@@ -36,7 +36,7 @@ const lib = {
     suburb2Data: { name: "Paramatta", postCode: "2150" },
     suburb3Data: { name: "Blacktown", postCode: "2148" },
     suburb4Data: { name: "Castle Hill", postCode: "2154" },
-    suburb5Data: { name: "Westmead", postcode: "2145" },
+    suburb5Data: { name: "Westmead", postCode: "2145" },
     school1Data: { name: "Sydney Boys" },
     school2Data: { name: "Paramatta Public" },
     school3Data: { name: "Smart Junior School" },
