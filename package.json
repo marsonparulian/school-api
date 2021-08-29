@@ -4,6 +4,7 @@
   "description": "A simple school API demo.",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server.js",
     "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch",
