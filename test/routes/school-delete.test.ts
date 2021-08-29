@@ -10,7 +10,20 @@ describe("DELETE /api/school/_id", () => {
         // Connect to DB
         await db.connect();
     })
-    test.todo("Missing id param");
+    test("Missing id param", async () => {
+        // Make request to delete without`_id`
+        const response = await supertest(app)
+            .delete("/api/school/")
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Response body should contain 'valid id is required' msg
+        expect(response.body).toEqual({
+            message: texts.VALID_ID_REQUIRED,
+        });
+        // Response status should be 400
+    });
     test.todo("Invalid id param");
     test.todo("Non existing id param in DB");
     test.todo("Successful deleetion");
