@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { idShouldExistAndValidInParams } from "../../middlewares/validator.middleware";
+import db from "../../services/db/db";
+import { idShouldExistAndValidInParams, middlewareIdInParamsShouldExistInDb } from "../../middlewares/validator.middleware";
 
 /**
  * Middleware to delete school by id
@@ -10,6 +11,7 @@ export const deleteSchoolById = async (req: Request, res: Response, next: NextFu
 
 const handlers = [
     idShouldExistAndValidInParams,
+    middlewareIdInParamsShouldExistInDb(db.school),
     deleteSchoolById,
 ];
 export default handlers;

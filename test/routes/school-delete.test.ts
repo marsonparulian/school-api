@@ -1,3 +1,4 @@
+import { text } from "express";
 import supertest from "supertest";
 import app from "../../src/app";
 import db from "../../src/services/db/db";
@@ -40,7 +41,21 @@ describe("DELETE /api/school/_id", () => {
         // Response status should be 400
         expect(response.status).toBe(400);
     });
-    test.todo("Non existing id param in DB");
+    test("Non existing id param in DB", async () => {
+        // Make request with non-existing id
+        const response = await supertest(app)
+            .delete(`/api/school/${testlib.randomId}`)
+            .catch((e) => {
+                throw (e);
+            });
+
+        // Request body should have 'id not exist' msg.
+        expect(response.body).toEqual({
+            message: texts.ID_NOT_EXIST,
+        });
+        // Request status should be 404
+        expect(response.status).toBe(404);
+    });
     test.todo("Successful deleetion");
     afterAll(async () => {
         // Disconnect
