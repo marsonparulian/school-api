@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import schoolSaveController from "../controllers/school/schoolSave.controller";
 import schoolUpdateController from "../controllers/school/schoolUpdate.controller";
 import * as schoolGetController from "../controllers/school/schoolGet.controller";
@@ -8,18 +8,98 @@ import schoolDeleteController from "../controllers/school/schoolDelete.controlle
 const router = Router();
 
 // GET list of school
-router.get("/", schoolGetController.getSchool);
+router.get("/",
+    (req: Request, res: Response, next: NextFunction): void => {
+        /*
+        #swagger.tags = ['School']
+        #swagger.description = 'Retrieve all schools'
+        #swagger.responses[200] = {
+            description: 'Success'
+        }
+        */
+        next();
+    },
+    schoolGetController.getSchool
+);
 
 // GET specific school by id
-router.get("/:_id", schoolGetController.validateThenGetSchoolById);
+router.get("/:_id",
+    (req: Request, res: Response, next: NextFunction): void => {
+        /*
+        #swagger.tags = ['School']
+        #swagger.description = 'Retrieve a school by id'
+        #swagger.parameters['_id']= {
+            type: 'string',
+            description: 'ID of the school'
+        }
+        #swagger.responses[200] = { description: 'Success'}
+        #swagger.responses[400] = { description: 'Invalid ID'}
+        #swagger.responses[404] = { description: 'ID not found'}
+        */
+        next();
+    },
+    schoolGetController.validateThenGetSchoolById
+);
 
 // Save new school
-router.post("/", schoolSaveController);
+router.post("/",
+    (req: Request, res: Response, next: NextFunction): void => {
+        /*
+        #swagger.tags = ['School']
+        #swagger.description = 'Create new school'
+        #swagger.parameters['name'] = {in: 'body', description: 'Name of school'}
+        #swagger.parameters['suburb'] = {in: 'body', description: 'ID of suburb where school located'}
+        #swagger.responses[201] = {description: 'Success'}
+        #swagger.responses[422] = {description: 'Invalid data'}
+        */
+        next();
+    },
+    schoolSaveController
+);
 
 // Save existing school
-router.put("/:_id", schoolUpdateController);
+router.put("/:_id",
+    (req: Request, res: Response, next: NextFunction): void => {
+        /*
+        #swagger.tags = ['School']
+        #swagger.description = 'Update existing school'
+        #swagger.parameters['_id'] = {
+            in: 'path',
+            description: 'ID of the school to be updated'
+        }
+        #swagger.parameters['name'] = {
+            in: 'body',
+            description: 'Name of the school'
+        }
+        #swagger.parameters['suburb'] = {
+            in: 'body',
+            description: 'ID of suburb location of the school'
+        }
+        #swagger.responses[200] = { description: 'Success'}
+        #swagger.responses[404] = { description: 'School ID not found'}
+        #swagger.responses[422] = {description: 'Invalid data'}
+       */
+        next();
+    },
+    schoolUpdateController
+);
 
 // DELETE school by id
-router.delete("/:_id?", schoolDeleteController);
+router.delete("/:_id?",
+    (req: Request, res: Response, next: NextFunction): void => {
+        /*
+        #swagger.tags = ['School']
+        #swagger.description = 'Delete school by ID'
+        #swagger.parameters['_id'] = {
+            in: 'path',
+            description: 'ID of the school'
+        }
+        #swagger.responses[200] = {description: 'Success'}
+        #swagger.responses[404] = {description: 'School ID not found'}
+              */
+        next();
+    },
+    schoolDeleteController
+);
 
 export default router;
