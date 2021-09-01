@@ -14,8 +14,8 @@ const doc = {
     host: "localhost:8080",
     consumes: ["application/json"],
     tags: [
+        { name: "Suburb", description: "Suburb CRUD" },
         { name: "School", description: "School CRUD" },
-        { name: SuburbModel, description: "Suburb CRUD" },
     ],
 };
 
