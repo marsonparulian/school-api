@@ -2,16 +2,23 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "Simple School API",
+    "description": "Simple demo API to do CRUd operations to school / suburb."
   },
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/",
-  "tags": [],
+  "tags": [
+    {
+      "name": "School",
+      "description": "School CRUD"
+    }
+  ],
   "schemes": [
     "http"
   ],
-  "consumes": [],
+  "consumes": [
+    "application/json"
+  ],
   "produces": [],
   "paths": {
     "/api/suburb/": {
