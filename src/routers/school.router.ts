@@ -47,8 +47,12 @@ router.post("/",
         /*
         #swagger.tags = ['School']
         #swagger.description = 'Create new school'
-        #swagger.parameters['name'] = {in: 'body', description: 'Name of school'}
-        #swagger.parameters['suburb'] = {in: 'body', description: 'ID of suburb where school located'}
+        #swagger.parameters['SchoolData'] = {
+            in: 'body',
+            description: 'School data',
+            type: 'object',
+            schema: { $ref : "#/definitions/SaveSchool"}
+        }
         #swagger.responses[201] = {description: 'Success'}
         #swagger.responses[422] = {description: 'Invalid data'}
         */
@@ -67,13 +71,11 @@ router.put("/:_id",
             in: 'path',
             description: 'ID of the school to be updated'
         }
-        #swagger.parameters['name'] = {
+        #swagger.parameters['SchoolData'] = {
             in: 'body',
-            description: 'Name of the school'
-        }
-        #swagger.parameters['suburb'] = {
-            in: 'body',
-            description: 'ID of suburb location of the school'
+            description: 'School data',
+            type: 'object',
+            schema: { $ref : "#/definitions/SaveSchool"}
         }
         #swagger.responses[200] = { description: 'Success'}
         #swagger.responses[404] = { description: 'School ID not found'}
@@ -95,7 +97,7 @@ router.delete("/:_id?",
             description: 'ID of the school'
         }
         #swagger.responses[200] = {description: 'Success'}
-        #swagger.responses[404] = {description: 'School ID not found'}
+        #swagger.responses[404] = {description: 'School ID not found'           }
               */
         next();
     },

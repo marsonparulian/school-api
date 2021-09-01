@@ -17,6 +17,12 @@ const doc = {
         { name: "Suburb", description: "Suburb CRUD" },
         { name: "School", description: "School CRUD" },
     ],
+    definitions: {
+        SaveSchool: {
+            name: "General Public School",
+            suburb: "123456789012345678901234",
+        },
+    },
 };
 
 // Generate swagger json
