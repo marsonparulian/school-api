@@ -15,6 +15,7 @@ const doc = {
     consumes: ["application/json"],
     tags: [
         { name: "School", description: "School CRUD" },
+        { name: SuburbModel, description: "Suburb CRUD" },
     ],
 };
 
