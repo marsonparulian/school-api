@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "swagger-autogen": "node doc/swagger.js",
+    "swagger-autogen": "node src/doc/swagger.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:clearCache": "jest --clearCache"
