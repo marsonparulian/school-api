@@ -15,7 +15,7 @@ const validate = async (req: Request, res: Response, next: NextFunction): Promis
         // Throw if has errors
         validationResult(req).throw();
         next();
-    } catch (e) {
+    } catch (e: any) {
         // Construct error msgs.
         const errors = createErrorMessages(e.array());
         // Send response regarding invalid request

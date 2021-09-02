@@ -14,7 +14,7 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
         // Throw if has errors
         validationResult(req).throw();
         next();
-    } catch (e) {
+    } catch (e: any) {
         // Construct error messages
         const errors: ErrorMessages = createErrorMessages(e.array());
 

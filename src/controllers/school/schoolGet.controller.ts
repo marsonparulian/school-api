@@ -21,7 +21,7 @@ export const getSchool = async (req: Request, res: Response): Promise<void> => {
     } catch (e) {
         res.status(500).json({
             message: texts.FETCH_FAILURE,
-            error: e.message,
+            error: (e instanceof Error) ? e.message : e,
         });
     }
 }
