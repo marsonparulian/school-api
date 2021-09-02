@@ -18,6 +18,10 @@ const doc = {
         { name: "School", description: "School CRUD" },
     ],
     definitions: {
+        SaveSuburb: {
+            name: "Sydney",
+            postCode: "2000",
+        },
         SaveSchool: {
             name: "General Public School",
             suburb: "123456789012345678901234",
