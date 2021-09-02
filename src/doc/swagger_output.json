@@ -1,0 +1,325 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Simple School API",
+    "description": "Simple demo API to do CRUd operations to school / suburb."
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Suburb",
+      "description": "Suburb CRUD"
+    },
+    {
+      "name": "School",
+      "description": "School CRUD"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [],
+  "paths": {
+    "/api/suburb/": {
+      "get": {
+        "tags": [
+          "Suburb"
+        ],
+        "description": "Retrieve all suburbs.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Suburb"
+        ],
+        "description": "Create new suburb.",
+        "parameters": [
+          {
+            "name": "SuburbData",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/SaveSuburb"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Invalid data"
+          }
+        }
+      }
+    },
+    "/api/suburb/{_id}": {
+      "get": {
+        "tags": [
+          "Suburb"
+        ],
+        "description": "Retrieve a suburb by ID.",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/suburb/{_id?}": {
+      "put": {
+        "tags": [
+          "Suburb"
+        ],
+        "description": "Update existing suburb.",
+        "parameters": [
+          {
+            "name": "_id?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "_id",
+            "in": "path",
+            "type": "string"
+          },
+          {
+            "name": "SuburbData",
+            "in": "body",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/SaveSuburb"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "400": {
+            "description": "Bad request."
+          },
+          "422": {
+            "description": "Invalid data."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Suburb"
+        ],
+        "description": "Delete a suburb by ID",
+        "parameters": [
+          {
+            "name": "_id?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "_id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the suburb."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "ID not valid"
+          },
+          "404": {
+            "description": "ID not exist"
+          }
+        }
+      }
+    },
+    "/api/school/": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "description": "Retrieve all schools",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "School"
+        ],
+        "description": "Create new school",
+        "parameters": [
+          {
+            "name": "SchoolData",
+            "in": "body",
+            "description": "School data",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/SaveSchool"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "422": {
+            "description": "Invalid data"
+          }
+        }
+      }
+    },
+    "/api/school/{_id}": {
+      "get": {
+        "tags": [
+          "School"
+        ],
+        "description": "Retrieve a school by id",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the school"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid ID"
+          },
+          "404": {
+            "description": "ID not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "School"
+        ],
+        "description": "Update existing school",
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the school to be updated"
+          },
+          {
+            "name": "SchoolData",
+            "in": "body",
+            "description": "School data",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/SaveSchool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "School ID not found"
+          },
+          "422": {
+            "description": "Invalid data"
+          }
+        }
+      }
+    },
+    "/api/school/{_id?}": {
+      "delete": {
+        "tags": [
+          "School"
+        ],
+        "description": "Delete school by ID",
+        "parameters": [
+          {
+            "name": "_id?",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "_id",
+            "in": "path",
+            "description": "ID of the school",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "School ID not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SaveSuburb": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Sydney"
+        },
+        "postCode": {
+          "type": "string",
+          "example": "2000"
+        }
+      }
+    },
+    "SaveSchool": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "General Public School"
+        },
+        "suburb": {
+          "type": "string",
+          "example": "123456789012345678901234"
+        }
+      }
+    }
+  }
+}
