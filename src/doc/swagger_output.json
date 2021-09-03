@@ -3,9 +3,9 @@
   "info": {
     "version": "1.0.0",
     "title": "Simple School API",
-    "description": "Simple demo API to do CRUd operations to school / suburb."
+    "description": "This is a simple demoAPI site to Create-Retrieve-Update-Delete (CRUD) schools and related suburbs."
   },
-  "host": "localhost:8080",
+  "host": "localhost:3000",
   "basePath": "/",
   "tags": [
     {
