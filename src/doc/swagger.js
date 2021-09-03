@@ -7,12 +7,8 @@ const outputFile = "src/doc/swagger_output.json";
 const endpointFile = ["src/app.ts"];
 
 // Check prerequisites
-if (!process.env.A_HOST) {
-    console.error("Missing env variables : 'A_HOST'");
-    exit();
-}
-if (!process.env.A_PORT) {
-    console.error("Missing env variable : A_PORT");
+if (!process.env.A_FULL_HOST) {
+    console.error("Missing env variables : 'A_FULL_HOST'");
     exit();
 }
 
@@ -23,8 +19,7 @@ const doc = {
         title: "Simple School API",
         description: "This is a simple demoAPI site to Create-Retrieve-Update-Delete (CRUD) schools and related suburbs.",
     },
-    // host:"localhost:8080",
-    host: `${process.env.A_HOST}:${process.env.A_PORT}`,
+    host: `${process.env.A_FULL_HOST}`,
     consumes: ["application/json"],
     tags: [
         { name: "Suburb", description: "Suburb CRUD" },
