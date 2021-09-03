@@ -20,7 +20,7 @@ const doc = {
         description: "This is a simple demoAPI site to Create-Retrieve-Update-Delete (CRUD) schools and related suburbs.",
     },
     host: `${process.env.A_FULL_HOST}`,
-    schemes: ['https'],
+    schemes: ['https', 'http'],
     consumes: ["application/json"],
     tags: [
         { name: "Suburb", description: "Suburb CRUD" },
