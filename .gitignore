@@ -1,3 +1,6 @@
+# Part of build process
+src/doc/swagger_output.json
+
 # Logs
 logs
 *.log
