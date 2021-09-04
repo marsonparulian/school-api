@@ -7,7 +7,7 @@ jobs:
       A_MONGODB_PASSWORD: ${{secrets.A_MONGODB_PASSWORD}}
       A_MONGODB_USERNAME: ${{secrets.A_MONGODB_USERNAME}}
       A_MONGODB_DB_NAME: ${{secrets.A_MONGODB_DB_NAME}}
-      A_FULL_HOST: localhost
+      A_FULL_HOST: 'localhost:3000'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -15,5 +15,4 @@ jobs:
           node-version: '14'
       - run: npm install
       - run: npm run build
-      - run: npm run log-vars
       - run: npm run test
