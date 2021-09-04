@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "npm run swagger-autogen && tsc",
+    "log-vars": "node dist/log-vars.js",
     "swagger-autogen": "node src/doc/swagger.js",
     "test": "jest",
     "test:watch": "jest --watch",
