@@ -1,4 +1,4 @@
-name: on-push
+name: build-then-test
 on: [push, workflow_dispatch]
 jobs: 
   run-test:
