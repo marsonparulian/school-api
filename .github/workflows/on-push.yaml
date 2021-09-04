@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       A_MONGODB_PASSWORD: ${{secrets.A_MONGODB_PASSWORD}}
-      A_FIRST_NAME: 'marson'
+      A_MONGODB_USERNAME: ${{secrets.A_MONGODB_USERNAME}}
+      A_MONGODB_DB_NAME: ${{secrets.A_MONGODB_DB_NAME}}
       A_FULL_HOST: localhost
     steps:
       - uses: actions/checkout@v2
@@ -15,3 +16,4 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run log-vars
+      - run: npm run test
