@@ -2,3 +2,4 @@
 import "dotenv/config";
 
 console.log("mpa environment vars : ", process.env);
+console.log("mpa mongodb pass : ", process.env.A_MONGODB_PASSWORD)
